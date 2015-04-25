@@ -8,30 +8,29 @@ define(["OrbitControls", "./data", "./cameras"], function (THREE, data, cameras)
   scene.add(cameras.topView);
   
   //Set up fog
-  var fog =  new THREE.Fog(0x16171c, 1, data.get('opts.far'));
+  var fog =  new THREE.Fog(0xceeaff, 1, data.get('opts.far')*2);
   scene.fog = fog;
 
   //Set up lights
-  var lights = {
-    ambient: new THREE.AmbientLight(0x21283b),
-    front: new THREE.DirectionalLight(0x2a2c33, 0.5),
-    back: new THREE.DirectionalLight(0x2a2c33, 0.7),
-    hemisphere: new THREE.HemisphereLight(0xaea9b9, 0x6c7589, 1.001)
-  };
-  //Add ambient
-  scene.add(lights.ambient);
   
-//  Add a light in front
-  lights.front.position.set(5, 5, 20);
-  scene.add(lights.front);
+  //Add a light in sky
+  var hemispherelight = new THREE.HemisphereLight(0xd6e7ff, 0x9ad7f7, 1);
+  scene.add(hemispherelight);
   
-  // add a light back
-  lights.back.position.set(0, 10, -20);
-  scene.add(lights.back);
+  //Add point light closer to scene
+  var light = new THREE.PointLight( 0xffffff, 1, 1000);
+  light.position.set(500, 500, 500);
+  scene.add( light );
   
-  // add a light in sky
-  lights.hemisphere.position.set(0, 500, 500);
-  scene.add(lights.hemisphere);
+  //Set up skydom
+  var geometry = new THREE.SphereGeometry (data.get('opts.far')*1.2);
+  var cloudTexture = THREE.ImageUtils.loadTexture(data.get('opts.skyURL'));
+  cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
+  cloudTexture.repeat.set(10, 10);
+  cloudTexture.anisotropy = 16;
+  material = new THREE.MeshPhongMaterial({color: 0xB8EEFF, side: THREE.DoubleSide, map: cloudTexture} );
+  var sky = new THREE.Mesh( geometry, material );
+  scene.add( sky );
   
   var geometry = new THREE.BoxGeometry(50, 50, 50 );
   var material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
