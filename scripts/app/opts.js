@@ -4,6 +4,7 @@ define({
   sheight: window.innerHeight,
   near: 1,
   far: 9000,
-  skyURL: 'images/clouds.jpg'
+  skyURL: 'images/clouds.jpg',
+  concreteURL: 'images/concrete.jpg'
   
 });

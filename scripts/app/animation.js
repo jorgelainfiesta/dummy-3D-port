@@ -6,6 +6,7 @@ define(['OrbitControls', './scene', './renderer', './cameras'], function (THREE,
     requestAnimationFrame(animate);
     renderer.render(scene.scene, cameras.topView);
     controls.update();
+    scene.updateScene();
   }
   return {"animate" : animate};
 });
