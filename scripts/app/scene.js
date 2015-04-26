@@ -1,4 +1,4 @@
-define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer"], function (THREE, materials, data, cameras, renderer) {
+define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./crane"], function (THREE, materials, data, cameras, renderer, crane) {
   var scene, clock = new THREE.Clock();
   //Set up scene
   scene = new THREE.Scene();
@@ -32,11 +32,21 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer"], fu
   scene.add( sky );
   
   //Set up port
-  var portGeometry = new THREE.BoxGeometry(data.get('opts.far'), 200, data.get('opts.far')/2);
+  var portGeometry = new THREE.BoxGeometry(data.get('opts.far'), 100, data.get('opts.far')/2);
   var port = new THREE.Mesh( portGeometry, materials.concreteMaterial );
-  port.position.set(0, 90, data.get('opts.far')/4);
+  port.position.set(0, 50, data.get('opts.far')/4);
   scene.add( port );
   
+  //Set up rails
+  var railPlane = new THREE.PlaneGeometry(data.get('opts.rail.length'), data.get('opts.crane.width')/2);
+  var rails = new THREE.Mesh(railPlane, materials.railsMaterial);
+  rails.rotation.x = -Math.PI * 0.5;
+  rails.position.set(0, 101, 150);
+  scene.add(rails);
+  
+  //Add crane to port
+  rails.add(crane.crane);
+//  crane.crane.position.set(0, 200, 0);
   //Set up water light
   
   var directionalLight = new THREE.DirectionalLight(0xffff55, 1);
@@ -73,6 +83,7 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer"], fu
   var updateScene = function(){
     ms_Water.material.uniforms.time.value += 1.0 / 60.0;
   }
+  
   
   return {"scene" : scene, updateScene: updateScene};
 });
