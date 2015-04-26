@@ -84,6 +84,7 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
     ms_Water.material.uniforms.time.value += 1.0 / 60.0;
   }
   
+  cameras.topView.position.z = 800;
   
   return {"scene" : scene, updateScene: updateScene};
 });
