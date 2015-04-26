@@ -15,11 +15,11 @@ define(['OrbitControls', './data'], function(THREE, data){
   
   //Crane base material
   var cranebaseTexture	= THREE.ImageUtils.loadTexture(data.get('opts.craneBaseURL'));
-  var craneBaseMaterial = new THREE.MeshLambertMaterial( {color: 0x2b4290, map: cranebaseTexture} );
+  var craneBaseMaterial = new THREE.MeshPhongMaterial( {color: 0xd01818, map: cranebaseTexture} );
   cranebaseTexture.wrapS = cranebaseTexture.wrapT = THREE.RepeatWrapping;
   cranebaseTexture.repeat.set(32, 32);
   
-  var craneWireTexture = new THREE.MeshLambertMaterial( {color: 0x2b4290, wireframe: true} );
+  var craneWireTexture = new THREE.MeshLambertMaterial( {color: 0xd01818, wireframe: true} );
 
   //Glass material
   var glassMaterial = new THREE.MeshPhongMaterial( {color: 0xc2e3fb, opacity: 0.5, transparent: true, specular: 0x77bef2, shininess: 70} );

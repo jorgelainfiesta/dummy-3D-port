@@ -73,7 +73,7 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
       new THREE.PlaneBufferGeometry(data.get('opts.far'), data.get('opts.far')/2, 1, 1), 
       ms_Water.material
   );
-  aMeshMirror.position.set(0, 0, -data.get('opts.far')/4);
+  aMeshMirror.position.set(0, 0, -data.get('opts.far')/4 );
   aMeshMirror.add(ms_Water);
   aMeshMirror.rotation.x = - Math.PI * 0.5;
   scene.add(aMeshMirror);
