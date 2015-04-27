@@ -1,0 +1,91 @@
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: absolute;
+}
+
+nav.main {
+  left: 32px;
+}
+nav.main li {
+  margin-top: 64px;
+  display: block;
+}
+nav.main button, nav.contextual button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+nav.main button {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 64px;
+  width: 64px;
+  height: 64px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+}
+nav.main button.selected {
+  border-color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+nav.main button.crane {
+  /* Created by Edward Boatman */
+  background-image: url(../images/crane.svg);
+}
+nav.main button.boat {
+  background-image: url(../images/boat.svg);
+}
+nav.main button.eye {
+  /* Created by Abe Garcia */
+  background-image: url(../images/eye.svg);
+}
+
+nav.contextual {
+  right: 0;
+}
+
+nav.contextual li {
+  display: block;
+  margin-top: 64px;
+}
+nav.contextual strong {
+  display: none;
+}
+nav.contextual button {
+  width: 64px;
+  height: 64px;
+  padding: 12px;
+  border-radius: 64px;
+  margin-right: 64px;
+}
+nav.contextual button i {
+  display: inline-block;
+  background-image: url(../images/contextual_icons.svg);
+  width: 32px;
+  height: 32px;
+  text-indent: -1000px;
+  overflow: hidden;
+}
+
+nav.contextual button i.rotate-left {background-position: 0 0;}
+nav.contextual button i.rotate-right {background-position: -32px 0;}
+nav.contextual button i.move-left {background-position: 0 -32px;}
+nav.contextual button i.move-right {background-position: -32px -32px;}
+nav.contextual button i.move-up {background-position: 0 -64px;}
+nav.contextual button i.move-down {background-position: -32px -64px;}
+
+nav.contextual .crane button {
+  background-color: rgba(208, 24, 24, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+nav.contextual .crane button:active {
+  background-color: rgba(208, 24, 24, 0.9);
+  border: 2px solid rgba(255, 255, 255, 1);
+}

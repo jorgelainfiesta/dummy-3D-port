@@ -3,9 +3,36 @@
 	<head>
         <meta charset="utf-8">
 		<title>Dummy 3D Port</title>
+<!--		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
+		<link rel="stylesheet" href="stylesheets/main.css">
 	</head>
-	<body style="margin: 0">
-
+	<body>
+        <nav class="main">
+          <ul>
+            <li><button class="eye selected"></button></li>
+            <li><button class="crane"></button></li>
+            <li><button class="boat"></button></li>
+          </ul>
+        </nav>
+        <nav class="contextual">
+          <ul class="crane">
+            <li>
+              <strong>Move in rails</strong>
+              <button data-action="move-left"><i class="move-left">Move left</i></button>
+              <button data-action="move-right"><i class="move-right">Move right</i></button>
+            </li>
+            <li>
+              <strong>Rotate</strong>
+              <button data-action="rotate-left"><i class="rotate-left">Rotate left</i></button>
+              <button data-action="rotate-right"><i class="rotate-right">Rotate right</i></button>
+            </li>
+            <li>
+              <strong>Up or down</strong>
+              <button data-action="move-up"><i class="move-up">Up</i></button>
+              <button data-action="move-down"><i class="move-down">Down</i></button>
+            </li>
+          </ul>
+        </nav>
 		<script src="scripts/lib/require.js" data-main="scripts/app.js"></script>
 	</body>
 </html>
