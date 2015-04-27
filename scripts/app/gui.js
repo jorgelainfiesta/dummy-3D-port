@@ -9,6 +9,18 @@ define(['jquery', './data'], function($, data){
       case 'move-right':
         data.increment('crane.basex', 10);
       break;
+      case 'rotate-left':
+        data.increment('crane.firstrotate', -0.1);
+      break;
+      case 'rotate-right':
+        data.increment('crane.firstrotate', 0.1);
+      break;
+      case 'move-up':
+        data.increment('crane.secondrotate', -0.1);
+      break;
+      case 'move-down':
+        data.increment('crane.secondrotate', 0.1);
+      break;
     }
   };
   var timeout;

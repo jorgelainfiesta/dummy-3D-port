@@ -49,6 +49,8 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   
   var update = function(){
     cranebase.position.x = data.get('crane.basex');
+    firstEdge.rotation.y = data.get('crane.firstrotate');
+    secondEdge.rotation.z = data.get('crane.secondrotate');
   }
   return {crane: cranebase, update: update};
 });

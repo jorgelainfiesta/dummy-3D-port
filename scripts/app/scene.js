@@ -82,9 +82,9 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
   //Function to update scene elements
   var updateScene = function(){
     ms_Water.material.uniforms.time.value += 1.0 / 60.0;
-  }
+  };
   
   cameras.topView.position.z = 800;
   
-  return {"scene" : scene, updateScene: updateScene};
+  return {scene : scene, update : updateScene};
 });

@@ -6,7 +6,7 @@ define(['OrbitControls', './scene', './renderer', './cameras', './crane'], funct
     requestAnimationFrame(animate);
     renderer.render(scene.scene, cameras.topView);
     controls.update();
-    scene.updateScene();
+    scene.update();
     crane.update();
   }
   return {"animate" : animate};
