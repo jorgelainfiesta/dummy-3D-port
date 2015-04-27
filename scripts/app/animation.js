@@ -1,4 +1,4 @@
-define(['OrbitControls', './scene', './renderer', './cameras'], function (THREE, scene, renderer, cameras) {
+define(['OrbitControls', './scene', './renderer', './cameras', './crane'], function (THREE, scene, renderer, cameras, crane) {
   //Animate
   var controls = new THREE.OrbitControls(cameras.topView, renderer.domElement);
   
@@ -7,6 +7,7 @@ define(['OrbitControls', './scene', './renderer', './cameras'], function (THREE,
     renderer.render(scene.scene, cameras.topView);
     controls.update();
     scene.updateScene();
+    crane.update();
   }
   return {"animate" : animate};
 });

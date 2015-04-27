@@ -3,7 +3,7 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   var geometry = new THREE.BoxGeometry(data.get('opts.crane.width'), data.get('opts.crane.width'), data.get('opts.crane.width') * 0.5);
   var cranebase = new THREE.Mesh( geometry, materials.craneBaseMaterial );
   cranebase.position.z = data.get('opts.crane.width') * 0.25;
-  
+
   //Set up first edge
   var geometry = new THREE.CylinderGeometry( data.get('opts.crane.width') * 0.20,  data.get('opts.crane.width') * 0.15, 200, 100, 100);
   var firstEdge = new THREE.Mesh(geometry, materials.craneBaseMaterial);
@@ -46,5 +46,9 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   thirdEdge.rotation.z = 0.9;
   secondEdge.add(thirdEdge);
   
-  return {crane: cranebase};
+  
+  var update = function(){
+    cranebase.position.x = data.get('crane.basex');
+  }
+  return {crane: cranebase, update: update};
 });
