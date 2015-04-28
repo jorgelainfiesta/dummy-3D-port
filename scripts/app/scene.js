@@ -38,7 +38,7 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
   scene.add( port );
   
   //Set up rails
-  var railPlane = new THREE.PlaneGeometry(data.get('opts.rail.length'), data.get('opts.crane.width')/2);
+  var railPlane = new THREE.PlaneBufferGeometry(data.get('opts.rail.length'), data.get('opts.crane.width')/2);
   var rails = new THREE.Mesh(railPlane, materials.railsMaterial);
   rails.rotation.x = -Math.PI * 0.5;
   rails.position.set(0, 101, 150);

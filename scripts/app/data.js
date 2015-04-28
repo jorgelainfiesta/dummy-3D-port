@@ -7,7 +7,8 @@ define(['./opts'], function (opts) {
     crane: {
       basex : 0,
       firstrotate: 0,
-      secondrotate: -0.9
+      secondrotate: -0.9,
+      thirdrotate: 0.9
     },
     opts: opts
   };

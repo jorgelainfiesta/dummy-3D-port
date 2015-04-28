@@ -80,6 +80,10 @@ nav.contextual button i.move-left {background-position: 0 -32px;}
 nav.contextual button i.move-right {background-position: -32px -32px;}
 nav.contextual button i.move-up {background-position: 0 -64px;}
 nav.contextual button i.move-down {background-position: -32px -64px;}
+nav.contextual button i.rotate-up {background-position: 0 -96px;}
+nav.contextual button i.rotate-down {background-position: -32px -96px;}
+nav.contextual button i.grab {background-position: 0 -128px;}
+nav.contextual button i.drop {background-position: -32px -128px;}
 
 nav.contextual .crane button {
   background-color: rgba(208, 24, 24, 0.6);
