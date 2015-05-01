@@ -10,6 +10,11 @@ define(['./opts'], function (opts) {
       secondrotate: -0.9,
       thirdrotate: 0.9
     },
+    ship: {
+      basex : 0,
+      basez : -300
+    },
+    cabinCamera: false,
     opts: opts
   };
   

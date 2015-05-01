@@ -1,4 +1,4 @@
-define(['OrbitControls', './data', './materials'], function (THREE, data, materials) {
+define(['OrbitControls', './data', './materials', './cameras'], function (THREE, data, materials, cameras) {
   //Crane base
   var geometry = new THREE.BoxGeometry(data.get('opts.crane.width'), data.get('opts.crane.width'), data.get('opts.crane.width') * 0.5);
   var cranebase = new THREE.Mesh( geometry, materials.craneBaseMaterial );
@@ -28,6 +28,11 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   cabin.position.set(-50, -100, 0);
   firstEdge.add(cabin);
   
+  var geometry = new THREE.BoxGeometry(10, 10, 10);
+  var cabinFront = new THREE.Mesh( geometry, materials.invisibleMaterial );
+  cabinFront.position.set(-100, 0, 0);
+  cabin.add(cabinFront);
+  
   //Set up second edge
   var geometry = new THREE.CylinderGeometry( data.get('opts.crane.width') * 0.10,  data.get('opts.crane.width') * 0.05, 400, 4, 4);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -400 * 0.5, 0 ) );
@@ -37,8 +42,8 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   firstEdge.add(secondEdge);
   
   //Set up third edge
-  var geometry = new THREE.CylinderGeometry( data.get('opts.crane.width') * 0.05,  data.get('opts.crane.width') * 0.05, 100, 4, 2);
-  geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 100 * 0.5, 0 ) );
+  var geometry = new THREE.CylinderGeometry( data.get('opts.crane.width') * 0.05,  data.get('opts.crane.width') * 0.05, 200, 4, 2);
+  geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 200 * 0.5, 0 ) );
   var thirdEdge = new THREE.Mesh(geometry, materials.craneWireTexture);
   thirdEdge.position.set(0, -400, 0);
   thirdEdge.rotation.z = 0.9;
@@ -47,17 +52,17 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
   var geometry = new THREE.CylinderGeometry(3, 3, 100, 10, 1);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -100 * 0.5, 0 ) );
   var rope = new THREE.Mesh(geometry, materials.ropeMaterial);
-  rope.position.set(0, 100, 0);
+  rope.position.set(0, 200, 0);
   rope.rotation.z = Math.PI - 0.9 + 0.9;
   thirdEdge.add(rope);
   
   var geometry = new THREE.CylinderGeometry(15, 15, 10, 10, 1);
   var magneto = new THREE.Mesh(geometry, materials.ropeMaterial);
   magneto.position.set(0, -100, 0);
-//  magneto.rotation.z = -Math.PI * 0.5;
   rope.add(magneto);
   
-  
+  //Add cabin camera
+  cabin.add(cameras.cabin);
   
   var update = function(){
     cranebase.position.x = data.get('crane.basex');
@@ -65,6 +70,11 @@ define(['OrbitControls', './data', './materials'], function (THREE, data, materi
     secondEdge.rotation.z = data.get('crane.secondrotate');
     thirdEdge.rotation.z = data.get('crane.thirdrotate');
     rope.rotation.z = Math.PI - data.get('crane.secondrotate') - data.get('crane.thirdrotate');
+    
+    var cabinPos = new THREE.Vector3( -1, 0, 0 );
+    cabinPos.copy(cabinFront.position);
+    cabinPos.setZ(cabinPos.getComponent(2) * -1);
+	cameras.cabin.lookAt( cabinPos );
   }
   return {crane: cranebase, update: update};
 });

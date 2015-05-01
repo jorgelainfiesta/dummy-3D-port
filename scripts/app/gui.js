@@ -52,10 +52,65 @@ define(['jquery', './data'], function($, data){
     }, 100);
     return false;
   });
+  
+  var moveShip = function(action){
+    switch(action){
+      case 'move-left':
+        if(data.get('ship.basex') > -1280){
+          data.increment('ship.basex', -10);
+        }
+      break;
+      case 'move-right':
+        if(data.get('ship.basex') < 1280){
+          data.increment('ship.basex', 10);
+        }
+      break;
+      case 'move-down':
+        if(data.get('ship.basez') < -300){
+          data.increment('ship.basez', 10);
+        }
+      break;
+      case 'move-up':
+        if(data.get('ship.basez') < 1280){
+          data.increment('ship.basez', -10);
+        }
+      break;
+    }
+  };
+  //Handle buttons for ship
+  $("nav.contextual .ship button").on("touchstart mousedown", function(){
+    var action = $(this).data('action');
+    moveShip(action);
+    //For continous button press
+    timeout = setInterval(function () {
+      moveShip(action);
+    }, 100);
+    return false;
+  });
+  
   //Remove interval
   $(document).on('touchend mouseup mouseout', function(){
     clearInterval(timeout);
     return false;
+  });
+  
+  $(".main button").on('click', function(){
+    var self = $(this);
+    $('.main button.selected').removeClass('selected');
+    self.addClass('selected');
+    $('.contextual ul').hide();
+  
+    if(self.hasClass('crane')){
+      $('.contextual ul.crane').show();
+      data.set('cabinCamera', true);
+      
+    } else if(self.hasClass('ship')){
+      $('.contextual ul.ship').show();
+      data.set('cabinCamera', false);
+    } else if(self.hasClass('eye')){
+      $('.contextual ul.crane').show();
+      data.set('cabinCamera', false);
+    }
   });
 
 });

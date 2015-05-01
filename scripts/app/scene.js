@@ -1,4 +1,4 @@
-define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./crane"], function (THREE, materials, data, cameras, renderer, crane) {
+define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./crane", "./container"], function (THREE, materials, data, cameras, renderer, crane, container) {
   var scene, clock = new THREE.Clock();
   //Set up scene
   scene = new THREE.Scene();
@@ -46,7 +46,61 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
   
   //Add crane to port
   rails.add(crane.crane);
-//  crane.crane.position.set(0, 200, 0);
+  //Add containers lot
+  rails.add(container.lot);
+  container.lot.position.set(0, -800, 1);
+  
+  var loader = new THREE.JSONLoader();
+  
+  //Add boat
+  loader.load(data.get('opts.models.boat'), function(geometry, materials){
+    
+    boat = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
+    boat.rotation.y = 2.7;
+    boat.position.set(2000, 50, -900);
+    boat.scale.set(20, 20, 20);
+    scene.add(boat);
+  });
+  
+  //Add ship
+  var shipLoaded = false;
+  var ship;
+  loader.load(data.get('opts.models.ship'), function(geometry, materials){
+    ship = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
+    ship.position.set(0, 100, -300);
+    ship.scale.set(200, 200, 200);
+    scene.add(ship);
+    ship.add(cameras.ship);
+    shipLoaded = true;
+  });
+  
+  var updateShip = function(){
+    if(shipLoaded){
+      ship.position.y = 100 + Math.sin(clock.getElapsedTime())*5;
+      ship.position.x = data.get('ship.basex');
+      ship.position.z = data.get('ship.basez');
+      var bposition = 2000 - (clock.getElapsedTime()*20) % 6000;
+      boat.position.x = bposition;
+      boat.position.y = 50 + Math.cos(clock.getElapsedTime())*3;
+//      cameras.ship.lookAt(ship.position);
+    }
+  }
+  
+  //Add lighthouse
+  loader.load(data.get('opts.models.lighthouse'), function(geometry, materials){
+    truck = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
+    truck.position.set(1600, 100, 200);
+    truck.scale.set(30, 30, 30);
+    scene.add(truck);
+  });
+  
+  loader.load(data.get('opts.models.police'), function(geometry, materials){
+    police = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
+    police.position.set(1000, 100, 200);
+    police.scale.set(10, 10, 10);
+    scene.add(police);
+  });
+  
   //Set up water light
   
   var directionalLight = new THREE.DirectionalLight(0xffff55, 1);
@@ -62,7 +116,7 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
       textureWidth: 256,
       textureHeight: 256,
       waterNormals: waterNormals,
-      alpha: 	1.0,
+      alpha: 	0.9,
       sunDirection: directionalLight.position.normalize(),
       sunColor: 0xffffff,
       waterColor: 0x10313c,
@@ -82,9 +136,11 @@ define(["OrbitControls", "./materials", "./data", "./cameras", "./renderer", "./
   //Function to update scene elements
   var updateScene = function(){
     ms_Water.material.uniforms.time.value += 1.0 / 60.0;
+    
   };
+
   
   cameras.topView.position.z = 800;
   
-  return {scene : scene, update : updateScene};
+  return {scene : scene, update : updateScene, updateShip: updateShip};
 });

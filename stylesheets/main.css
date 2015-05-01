@@ -39,7 +39,7 @@ nav.main button.crane {
   /* Created by Edward Boatman */
   background-image: url(../images/crane.svg);
 }
-nav.main button.boat {
+nav.main button.ship {
   background-image: url(../images/boat.svg);
 }
 nav.main button.eye {
@@ -91,5 +91,16 @@ nav.contextual .crane button {
 }
 nav.contextual .crane button:active {
   background-color: rgba(208, 24, 24, 0.9);
+  border: 2px solid rgba(255, 255, 255, 1);
+}
+nav.contextual .ship {
+  display: none;
+}
+nav.contextual .ship button {
+  background-color: rgba(24, 95, 208, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+nav.contextual .ship button:active {
+  background-color: rgba(24, 95, 208, 0.6);
   border: 2px solid rgba(255, 255, 255, 1);
 }
