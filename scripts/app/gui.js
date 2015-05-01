@@ -42,9 +42,12 @@ define(['jquery', './data'], function($, data){
     }
   };
   var timeout;
+  
+  var craneSound = new Audio(data.get('opts.audio.crane'));
   //Handle buttons for crane
   $("nav.contextual .crane button").on("touchstart mousedown", function(){
     var action = $(this).data('action');
+    craneSound.play();
     moveCrane(action);
     //For continous button press
     timeout = setInterval(function () {
@@ -77,6 +80,7 @@ define(['jquery', './data'], function($, data){
       break;
     }
   };
+
   //Handle buttons for ship
   $("nav.contextual .ship button").on("touchstart mousedown", function(){
     var action = $(this).data('action');
@@ -91,6 +95,7 @@ define(['jquery', './data'], function($, data){
   //Remove interval
   $(document).on('touchend mouseup mouseout', function(){
     clearInterval(timeout);
+    craneSound.stop();
     return false;
   });
   

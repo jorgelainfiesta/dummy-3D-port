@@ -29,6 +29,9 @@ define({
     lighthouse: 'scripts/models/lighthouse.json',
     ship: 'scripts/models/ship.json',
     boat: 'scripts/models/boat.json'
+  },
+  audio: {
+    crane: 'audio/crane.mp3'
   }
   
 });
