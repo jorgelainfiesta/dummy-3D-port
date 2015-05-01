@@ -9,7 +9,7 @@ requirejs.config({
       "app": "../app",
     },
     "shim" : {
-      "datgui" : {exports: "dat"}
+      "tour" : ['jquery']
     }
 });
 

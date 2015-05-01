@@ -95,7 +95,7 @@ define(['jquery', './data'], function($, data){
   //Remove interval
   $(document).on('touchend mouseup mouseout', function(){
     clearInterval(timeout);
-    craneSound.stop();
+//    craneSound.stop();
     return false;
   });
   
