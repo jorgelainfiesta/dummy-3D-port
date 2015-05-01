@@ -26,6 +26,7 @@ define(['OrbitControls', './data', './materials', './cameras'], function (THREE,
   var geometry = new THREE.BoxGeometry(50, 50, 50);
   var cabin = new THREE.Mesh( geometry, materials.glassMaterial );
   cabin.position.set(-50, -100, 0);
+  cabin.rotation.x = Math.PI;
   firstEdge.add(cabin);
   
   var geometry = new THREE.BoxGeometry(10, 10, 10);
